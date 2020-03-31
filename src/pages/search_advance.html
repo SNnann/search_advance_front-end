@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<title>Advance Search</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<body>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<h4 align="center">คลังข้อมูลเตรียมความพร้อมก่อนยื่นคำขอ</h4>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<form class="form-inline" style="margin-top: 0px;" action="http://search.thai-fda.com/level1/%E0%B8%82%E0%B8%AD%E0%B8%AD%E0%B8%99%E0%B8%B8%E0%B8%8D%E0%B8%B2%E0%B8%95%E0%B8%99%E0%B8%B3%E0%B8%AB%E0%B8%A3%E0%B8%B7%E0%B8%AD%E0%B8%AA%E0%B8%B1%E0%B9%88%E0%B8%87%E0%B8%AD%E0%B8%B2%E0%B8%AB%E0%B8%B2%E0%B8%A3%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%A1%E0%B8%B2%E0%B9%83%E0%B8%99%E0%B8%A3%E0%B8%B2%E0%B8%8A%E0%B8%AD%E0%B8%B2%E0%B8%93%E0%B8%B2%E0%B8%88%E0%B8%B1%E0%B8%81%E0%B8%A3%20(%E0%B9%81%E0%B8%9A%E0%B8%9A%20%E0%B8%AD.6)/drill/22" method="get">
+  						<div class="form-group mb-2">
+    						<input type="text" class="form-control" id="text" placeholder="พิมพ์คำที่ต้องการค้นหา...">
+  						</div>
+  						<div style="margin-left:15px;">
+  							<button type="submit" class="btn btn-success btn-md">ค้นหา</button>
+  						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<p>	
+  						<button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="margin-top:15px;">
+    					ค้นหาแบบละเอียด
+  						</button>
+					</p>
+					<div  class="collapse" id="collapseExample">
+						<div class="card card-body">
+    						<h6>หมวดหมู่</h6>
+					<form>
+						<div class="custom-control custom-checkbox">
+  							<select class="form-control" style="margin-top: 15px;">
+  								<option>เลือกหมวดหมู่</option>
+  								<option>อาหาร</option>
+  								<option>ยา</option>
+  								<option>เครื่องสำอาง</option>
+  								<option>เครื่องมือแพทย์</option>
+  								<option>วัตถุเสพติด</option>
+  								<option>วัตถุอันตราย</option>
+							</select>
+
+							<select class="form-control" style="margin-top: 15px;">
+  								<option>เลือกกลุ่ม</option>
+  								<option>สถานที่</option>
+  								<option>ผลิตภัณฑ์</option>
+  								<option>โฆษณา</option>
+							</select>
+
+							<select class="form-control" style="margin-top: 15px;">
+  								<option>เลือกกลุ่มใบอนุญาต</option>
+  								<option>ใบอนุญาตสถานที่ผลิตอาหาร กรณีเข้าข่ายโรงงาน</option>
+  								<option>ใบอนุญาตสถานที่ผลิตอาหาร กรณีไม่เข้าข่ายโรงงาน</option>
+  								<option>ขอแก้ไขเปลี่ยนแปลงรายการในใบอนุญาต</option>
+							</select>
+
+							<select class="form-control" style="margin-top: 15px;">
+  								<option>เลือกใบอนุญาต</option>
+  								<option>ขอใบอนุญาตใหม่</option>
+  								<option>ขอใบแก้ไขใบอนุญาต</option>
+  								<option>ขอต่ออายุใบอนุญาต</option>
+  								<option>ขอใบแทนใบอนุญาต</option>
+  								<option>ขอใบยกเลิกใบอนุญาต</option>
+							</select>
+
+							<select class="form-control" style="margin-top: 15px;">
+  								<option>เลือกเวลา</option>
+  								<option>ต่ำกว่า 3 เดือน</option>
+  								<option>ต่ำกว่า 6 เดือน</option>
+  								<option>มากกว่า 6 เดือน</option>
+  								<option>แสดงทั้งหมด</option>
+  								
+							</select>
+
+						</div>
+
+					</form>
+  						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col">
+					<p>	
+  						<button class="btn btn-success" type="button" data-toggle="collapse" data-target="#collapseExample2" aria-expanded="false" aria-controls="collapseExample2" style="margin-top:15px;">
+    					ลำดับการแสดงผล
+  						</button>
+					</p>
+					<div  class="collapse" id="collapseExample2">
+						<div class="card card-body">
+    					<h6>หมวดหมู่</h6>
+						<form>
+							<select class="custom-select">
+  								<option selected>การแสดงผลแบบปกติ</option>
+  								<option value="sort_text">เรียงการแสดงผลตามตัวอักษร ก-ฮ </option>
+  								<option value="sort_rank">เรียงการแสดงผลตามการเข้าใช้งาน</option>
+							</select>		
+						</form>
+  						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</section>
+</body>
+</html>
