@@ -9,7 +9,7 @@ class Level3 extends Component{
         super();
         this.state={
             text:'อาหาร',
-            count:1,
+            count:0,
             data:[
                 {
                     id: '119',
@@ -19,9 +19,7 @@ class Level3 extends Component{
                     group: 'อาหาร',
                 },
             ],
-            file:[
-
-            ]
+            file:[]
         }
     }
 
@@ -35,10 +33,10 @@ class Level3 extends Component{
         const myHeaders = new Headers()
         myHeaders.append('Content-Type', 'application/json')
         //myHeaders.append('Authorization', 'Bearer ' + this.props.isToken)
-        // fetch(apiurl + '/api/searchAdvance/',requestOptions)
-        //     .then(response => response.json())
-        //     .then(dataout => this.setState({ data: dataout.data,count: dataout.count,file: dataout.file })
-        //     )
+        fetch(apiurl + '/api/searchAdvance/',requestOptions)
+            .then(response => response.json())
+            .then(dataout => this.setState({ data: dataout.data,count: dataout.count,file: dataout.file })
+            )
     }
 
     render(){
@@ -46,11 +44,11 @@ class Level3 extends Component{
         this.state.data.map((key, index) => (
             list.push(
                 {
-                    id: 119,
+                    id: key.id,
                     name: key.name,
                     state: key.state,
                     group: key.group,
-                    link: '/level1/' +'อาหาร'+'/drill/' +119,
+                    link: '/level1/' + key.name +'/drill/' +key.id,
                 }
             )
         ))
@@ -70,7 +68,7 @@ class Level3 extends Component{
                                         <Card.Header>ค้นหาภายในเว็บไซต์</Card.Header>
                                         <Card.Description>
                                             <p>
-                                                อาหาร
+                                                ยา > 
                                             </p>
                                             <p>
                                                 <b>ผลการค้นหาพบทั้งสิ้น {this.state.count} รายการ</b>
@@ -116,7 +114,7 @@ class Level3 extends Component{
                                                 />
                                             </Card.Header>
                                             <Card.Description>
-                                                <p>{this.group}</p>
+                                                <p>{this.name}</p>
                                                 <hr/>
                                                 <p>{key.group}</p>
                                             </Card.Description>
@@ -124,7 +122,7 @@ class Level3 extends Component{
                                     </Card>
                                 ))}
                                 {this.state.file.map((key, index) => (
-                                    <Card fluid href={key.link}>
+                                    <Card fluid href={key.file}>
                                         <Card.Content>
                                             <Card.Header>
                                                 <Highlighter
@@ -135,7 +133,7 @@ class Level3 extends Component{
                                                 />
                                             </Card.Header>
                                             <Card.Description>
-                                                <p>{key.group}</p>
+                                                <p>{this.state.data.name}</p>
                                                 <hr/>
                                                 <p>แหล่งที่มา {key.ref}</p>
                                             </Card.Description>

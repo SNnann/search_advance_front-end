@@ -30,7 +30,7 @@ class Level19 extends Component{
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: this.props.match.params.text,a0: this.props.match.params.a0, a1: this.props.match.params.a1, a2: this.props.match.params.a2})
+            body: JSON.stringify({ text: this.props.match.params.text,a0: this.props.match.params.a0, a1: this.props.match.params.a1, a2: this.props.match.params.a2, a3: this.props.match.params.a3})
         }
         const myHeaders = new Headers()
         myHeaders.append('Content-Type', 'application/json')

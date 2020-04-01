@@ -68,10 +68,12 @@ class Search extends Component {
 
     render() {
         const select_level0 = [
+            { key: 'อาหาร', text: 'อาหาร', value: 'อาหาร' },
             { key: 'ยา', text: 'ยา', value: 'ยา' },
         ]
 
         const select_level1 = [
+            { key: 'สถานที่', text:'สถานที่', value: 'สถานที่' },
             { key: 'ทะเบียนตำรับยา', text: 'ทะเบียนตำรับยา', value: 'ทะเบียนตำรับยา' },
             { key: 'ใบอนุญาต', text: 'ใบอนุญาต', value: 'ใบอนุญาต' },
             { key: 'โฆษณา', text: 'โฆษณา', value: 'โฆษณา' },
@@ -86,6 +88,15 @@ class Search extends Component {
             { key: '​ขอใบแทนใบอนุญาต', text: '​ขอใบแทนใบอนุญาต', value: '​ขอใบแทนใบอนุญาต' },
             { key: '​ขอยกเลิกใบอนุญาต', text: '​ขอยกเลิกใบอนุญาต', value: '​ขอยกเลิกใบอนุญาต' },
         ]
+
+        const select_level3 = [
+
+        ]
+
+        const select_time = [
+            { key: '1' , text: 'ภายใน 3 เดือน', value: '1'}
+        ]
+            
 
         
         const SearchAdvanceForm = (                               
@@ -119,6 +130,26 @@ class Search extends Component {
                         name='a2'
                         onChange={this.onSearchChangea2}
                         id='a2'
+                    />
+
+                    <Form.Field
+                        control={Select}
+                        label=''
+                        options={select_level3}
+                        placeholder='เลือกกระบวนการ'
+                        name='a3'
+                        onChange={this.onSearchChangea3}
+                        id='a3'
+                    />
+
+                    <Form.Field
+                        control={Select}
+                        label=''
+                        options={select_time}
+                        placeholder='เลือกช่วงเวลา'
+                        name='time'
+                        onChange={this.onSearchChangetime}
+                        id='time'
                     />
         
                 </Form.Group>
@@ -219,52 +250,30 @@ class Search extends Component {
 
                             <Grid.Row>
                                 <Grid.Column width={3}>
-                                    {this.state.a2 === "" && this.state.a1 === "" && this.state.a0 === "ยา" && <Link to ={'/level19/'+this.state.a0}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "" && this.state.a1 === "ทะเบียนตำรับยา" && this.state.a0 === "ยา" && <Link to ={'/level20/'+this.state.a0+'/'+this.state.a1}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 !== "" && this.state.a1 === "ทะเบียนตำรับยา" && this.state.a0 === "ยา" && <Link to ={'/level20/'+this.state.a0+'/'+this.state.a1}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "" && this.state.a1 === "ใบอนุญาต" && this.state.a0 === "ยา" && <Link to ={'/level21/'+this.state.a0+'/'+this.state.a1}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "ขอใบอนุญาตใหม่" && this.state.a1 === "ใบอนุญาต" && this.state.a0 === "ยา" && <Link to ={'/level22/'+this.state.a0+'/'+this.state.a1+'/'+this.state.a2}>
+                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "ขอแก้ไขเปลี่ยนแปลงรายการในใบอนุญาต" && this.state.a1 === "ใบอนุญาต" && this.state.a0 === "ยา" && <Link to ={'/level23/'+this.state.a0+'/'+this.state.a1+'/'+this.state.a2}>
+                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "ขอต่ออายุใบอนุญาต" && this.state.a1 === "ใบอนุญาต" && this.state.a0 === "ยา" && <Link to ={'/level24/'+this.state.a0+'/'+this.state.a1+'/'+this.state.a2}>
+                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "​ขอใบแทนใบอนุญาต" && this.state.a1 === "ใบอนุญาต" && this.state.a0 === "ยา" && <Link to ={'/level25/'+this.state.a0+'/'+this.state.a1+'/'+this.state.a2}>
+                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a2 === "​ขอยกเลิกใบอนุญาต" && this.state.a1 === "ใบอนุญาต" && this.state.a0 === "ยา" && <Link to ={'/level26/'+this.state.a0+'/'+this.state.a1+'/'+this.state.a2}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a2 === "" && this.state.a1 === "โฆษณา" && this.state.a0 === "ยา" && <Link to ={'/level27/'+this.state.a0+'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a2 !== "" && this.state.a1 === "โฆษณา" && this.state.a0 === "ยา" && <Link to ={'/level27/'+this.state.a0+'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a2 === "" && this.state.a1 === "หนังสือรับรองมาตรฐานสถานที่ผลิตยาในต่างประเทศ ฯ" && this.state.a0 === "ยา" && <Link to ={'/level28/'+this.state.a0+'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a2 !== "" && this.state.a1 === "หนังสือรับรองมาตรฐานสถานที่ผลิตยาในต่างประเทศ ฯ" && this.state.a0 === "ยา" && <Link to ={'/level28/'+this.state.a0+'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a2 === "" && this.state.a1 === "อื่นๆ" && this.state.a0 === "ยา" && <Link to ={'/level29/'+this.state.a0+'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a2 !== "" && this.state.a1 === "อื่นๆ" && this.state.a0 === "ยา" && <Link to ={'/level29/'+this.state.a0+'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-
                                 </Grid.Column>
                             </Grid.Row>
                         </Grid>
