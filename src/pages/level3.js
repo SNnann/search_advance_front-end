@@ -8,7 +8,6 @@ class Level3 extends Component{
     constructor() {
         super();
         this.state={
-            text:'อาหาร',
             count:0,
             data:[
                 {
@@ -19,8 +18,10 @@ class Level3 extends Component{
                     group: 'อาหาร',
                 },
             ],
-            file:[]
-        }
+            file:[],
+            value: ''
+        };
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount(){
@@ -38,6 +39,11 @@ class Level3 extends Component{
             .then(dataout => this.setState({ data: dataout.data,count: dataout.count,file: dataout.file })
             )
     }
+
+    handleChange(event) {
+        this.setState({value: event.target.value});
+    }
+
     render(){
         var list = []
         this.state.data.map((key, index) => (
@@ -48,32 +54,33 @@ class Level3 extends Component{
                     state: key.state,
                     group: key.group,
                     link: '/level1/' + key.name +'/drill/' +key.id,
+                    date: key.date
                 }
             )
         ))
-        function compareValues(key, order = 'asc'){
+        function compareValues(key, order = 'asc') {
             return function innerSort(a, b) {
-                if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-                    //property doesn't exist on either object
-                    return 0;
-                }
-                const varA = (typeof a[key] === 'string')
-                    ? a[key].toUpperCase() : a[key];
-                const varB = (typeof b[key] === 'string')
-                    ? b[key].toUpperCase() : b[key];
-                
-                let comparison = 0;
-                if (varA > varB){
-                    comparison = 1;
-                } else if (varA < varB) {
-                    comparison = -1;
-                }
-                return (
-                    (order === 'desc') ? (comparison * -1) : comparison 
-                );      
+              if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+                // property doesn't exist on either object
+                return 0;
+              }
+          
+              const varA = (typeof a[key] === 'string')
+                ? a[key].toUpperCase() : a[key];
+              const varB = (typeof b[key] === 'string')
+                ? b[key].toUpperCase() : b[key];
+          
+              let comparison = 0;
+              if (varA > varB) {
+                comparison = 1;
+              } else if (varA < varB) {
+                comparison = -1;
+              }
+              return (
+                (order === 'desc') ? (comparison * -1) : comparison
+              );
             };
-        }
-
+          }
         return (
             <>
                 <Container fluid>
@@ -105,17 +112,13 @@ class Level3 extends Component{
                                             <Grid.Row>
                                                 <Grid.Column width={10}>
                                                     <Form class="ui form" style={{marginLeft: 15, marginRight: 15}}>
-                                                        <select>
-                                                            <option value="1">เรียงการแสดงผลตามตัวอักษร</option>
-                                                            <option value="2">เรียงการแสดงผลตามความถี่การเข้าใช้งาน</option>
-                                                            <option value="3">เรียงการแสดงผลตามเวลา</option>
+                                                        <select value={this.state.value} onChange={this.handleChange}>
+                                                            <option value="">เลือกเรียงการแสดงผล</option>
+                                                            <option value="name">เรียงการแสดงผลตามตัวอักษร</option>
+                                                            <option value="rank">เรียงการแสดงผลตามความถี่การเข้าใช้งาน</option>
+                                                            <option value="date">เรียงการแสดงผลตามเวลา</option>
                                                         </select>
                                                     </Form>
-                                                </Grid.Column>
-                                                <Grid.Column width={3}>
-                                                    <Link to={'/level3/'}>
-                                                        <Button size='small' fluid positive >เรียง</Button>
-                                                    </Link>
                                                 </Grid.Column>
                                             </Grid.Row>
                                         </Card.Description>
@@ -124,7 +127,7 @@ class Level3 extends Component{
                                 <br/>
                                 <hr/>
                                 <br/>
-                                {list.map((key, index) => (
+                                {list.sort(compareValues(this.state.value)).map((key, index) => (
                                     <Card fluid href={key.link}>
                                         <Card.Content>
                                             <Card.Header>

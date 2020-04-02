@@ -13,7 +13,7 @@ class Level22 extends Component{
                 {
                     id: '37',
                     name: 'ยา',
-                    state: '2',
+                    state: '0',
                     link: '37',
                     group: 'ยา',
                 },
@@ -32,9 +32,9 @@ class Level22 extends Component{
                     group: 'ยา',
                 },
             ],
-            file:[
-
-            ]
+            file:[],
+            sortType: 'desc',
+            value: 'link'
         }
     }
 
@@ -64,9 +64,14 @@ class Level22 extends Component{
                     state: key.state,
                     group: key.group,
                     link: '/level1/' +'ขอใบอนุญาตใหม่'+'/drill/' +key.id,
+                    value: (this.state.value),
                 }
             )
         ))
+        const sorted = list.sort( (a, b) => {
+            const isReversed = (this.state.sortType === 'asc') ? 1 : -1;
+            return isReversed * a.name.localeCompare(b.name)
+        } );
         return (
             <>
                 <Container fluid>
@@ -117,7 +122,7 @@ class Level22 extends Component{
                                 <br/>
                                 <hr/>
                                 <br/>
-                                {list.map((key, index) => (
+                                {sorted.map((key, index) => (
                                     <Card fluid href={key.link}>
                                         <Card.Content>
                                             <Card.Header>
