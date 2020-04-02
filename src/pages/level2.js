@@ -16,7 +16,7 @@ class Search extends Component {
         const myHeaders = new Headers()
         myHeaders.append('Content-Type', 'application/json')
         //myHeaders.append('Authorization', 'Bearer ' + this.props.isToken)
-        fetch(apiurl + '/api/drill/'+this.props.match.params.text+'/?format=json', { method: 'GET', headers: myHeaders })
+        fetch(apiurl + '/api/drill/'+this.props.match.params.text2+'/?format=json', { method: 'GET', headers: myHeaders })
             .then(response => response.json())
             .then(dataout => this.setState({ data: dataout.data, name: dataout.name, isfile: dataout.isfile })
             )

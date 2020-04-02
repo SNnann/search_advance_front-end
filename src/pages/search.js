@@ -62,7 +62,7 @@ class Search extends Component {
             a1:'',
             a2:'',
             a3:'',
-            time:'',
+            time:'0',
         }
     }
 
@@ -94,7 +94,9 @@ class Search extends Component {
         ]
 
         const select_time = [
-            { key: '1' , text: 'ภายใน 3 เดือน', value: '1'}
+            { key: '0' , text: 'แสดงทั้งหมด', value: '0'},
+            { key: '1' , text: 'ภายใน 3 เดือน', value: '1'},
+            { key: '2' , text: 'ภายใน 6 เดือน', value: '2'},
         ]
             
 
@@ -155,34 +157,7 @@ class Search extends Component {
                 </Form.Group>
             </Form>
         )
-        
-        const sortForm = (
-            <Form>
-                <Form.Group grouped>
-                    <Form.Field
-                        label='เรียงการแสดงผลตามอักษร ก-ฮ'
-                        control='input'
-                        type='radio'
-                        name='sort'
-                        value='01'
-                    />
-                    <Form.Field
-                        label='เรียงการแสดงผลตามจำนวนผู้เข้าใช้งาน'
-                        control='input'
-                        type='radio'
-                        name='sort'
-                        value='02'
-                    />
-                    <Form.Field
-                        label='เรียงการแสดงผลตามระยะเวลา'
-                        control='input'
-                        type='radio'
-                        name='sort'
-                        value='03'
-                    />
-                </Form.Group>
-            </Form>
-        )
+    
         const { activeIndex } = this.state
         return (
             <>
@@ -234,44 +209,34 @@ class Search extends Component {
                                             />
                                             <Accordion.Content active={activeIndex === 0} content={SearchAdvanceForm} />
                                         </Menu.Item>
-                                        <Menu.Item>
-                                            <Accordion.Title
-                                                size='big'
-                                                active={activeIndex === 1}
-                                                content='การเรียงลำดับการแสดงผล'
-                                                index={1}
-                                                onClick={this.handleClick}
-                                            />
-                                            <Accordion.Content aligned = 'left' active={activeIndex === 1} content={sortForm} />
-                                        </Menu.Item>
                                     </Accordion>
                                 </Grid.Column>
                             </Grid.Row>
 
                             <Grid.Row>
                                 <Grid.Column width={3}>
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0+'/'+this.state.time}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.time}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
                                     {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
+                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.time}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
+                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
+                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.time}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
+                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.a3}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
-                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
+                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.a3+'/'+this.state.time}>
                                         <Button size='large' fluid positive >ค้นหาละเอียด</Button>
                                     </Link>}
                                 </Grid.Column>
