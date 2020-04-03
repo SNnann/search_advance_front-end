@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {Button, Card, Container, Grid, Image, Input, Segment, GridRow, Form} from "semantic-ui-react";
 import Highlighter from "react-highlight-words";
-import src1 from "../images/Banner04.png";
+import src1 from "../images/Banner4.png";
 import {Link} from "react-router-dom";
 import {apiurl} from "../config/api";
+import Linkify from 'react-linkify';
 class Level3 extends Component{
     constructor() {
         super();
@@ -16,10 +17,14 @@ class Level3 extends Component{
                     state: '0',
                     link: '119',
                     group: 'อาหาร',
+                    date: '',
+                    rank: '15'
                 },
             ],
             file:[],
-            value: ''
+            value: '',
+            order: 'asc',
+            text_data: ''
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -38,10 +43,27 @@ class Level3 extends Component{
             .then(response => response.json())
             .then(dataout => this.setState({ data: dataout.data,count: dataout.count,file: dataout.file })
             )
+            if (this.props.match.params.a0 !== '' && this.props.match.params.a0 !== undefined){
+                if (this.props.match.params.a1 !== '' && this.props.match.params.a1 !== undefined){
+                    if (this.props.match.params.a2 !== '' && this.props.match.params.a2 !== undefined){
+                        if (this.props.match.params.a3 !== '' && this.props.match.params.a3 !== undefined){
+                            this.setState({text_data: this.props.match.params.a0 +' > ' +this.props.match.params.a1 +' > '+this.props.match.params.a2 +' > ' +this.props.match.params.a3})
+                        } else {
+                            this.setState({text_data: this.props.match.params.a0 +' > ' +this.props.match.params.a1 +' > '+this.props.match.params.a2})
+                        } 
+                    } else {
+                        this.setState({text_data: this.props.match.params.a0 +' > ' +this.props.match.params.a1})
+                    }
+                } else {
+                    this.setState({text_data: this.props.match.params.a0})
+                }
+            }
     }
-
-    handleChange(event) {
-        this.setState({value: event.target.value});
+    handleChange = e => {
+        const value = e.target.value
+        this.setState({
+            value: value,
+        })
     }
 
     render(){
@@ -54,27 +76,32 @@ class Level3 extends Component{
                     state: key.state,
                     group: key.group,
                     link: '/level1/' + key.name +'/drill/' +key.id,
-                    date: key.date
+                    date: key.date,
+                    rank: key.rank,
                 }
             )
         ))
+
         function compareValues(key, order = 'asc') {
             return function innerSort(a, b) {
               if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
                 // property doesn't exist on either object
                 return 0;
-              }
-          
-              const varA = (typeof a[key] === 'string')
-                ? a[key].toUpperCase() : a[key];
-              const varB = (typeof b[key] === 'string')
-                ? b[key].toUpperCase() : b[key];
+              }  
+              const varA = (typeof a[key] === 'number')
+                ? a[key] : a[key].toUpperCase();
+              const varB = (typeof b[key] === 'number')
+                ? b[key] : b[key].toUpperCase();
           
               let comparison = 0;
               if (varA > varB) {
                 comparison = 1;
               } else if (varA < varB) {
                 comparison = -1;
+              }
+
+              if (key === 'rank'){
+                  order = 'desc';
               }
               return (
                 (order === 'desc') ? (comparison * -1) : comparison
@@ -97,7 +124,7 @@ class Level3 extends Component{
                                         <Card.Header>ค้นหาภายในเว็บไซต์</Card.Header>
                                         <Card.Description>
                                             <p>
-                                                ยา > 
+                                                {this.state.text_data}
                                             </p>
                                             <p>
                                                 <b>ผลการค้นหาพบทั้งสิ้น {this.state.count} รายการ</b>
@@ -114,7 +141,7 @@ class Level3 extends Component{
                                                     <Form class="ui form" style={{marginLeft: 15, marginRight: 15}}>
                                                         <select value={this.state.value} onChange={this.handleChange}>
                                                             <option value="">เลือกเรียงการแสดงผล</option>
-                                                            <option value="name">เรียงการแสดงผลตามตัวอักษร</option>
+                                                            <option value="name" >เรียงการแสดงผลตามตัวอักษร</option>
                                                             <option value="rank">เรียงการแสดงผลตามความถี่การเข้าใช้งาน</option>
                                                             <option value="date">เรียงการแสดงผลตามเวลา</option>
                                                         </select>
@@ -126,7 +153,7 @@ class Level3 extends Component{
                                 </Card>
                                 <br/>
                                 <hr/>
-                                <br/>
+                                <br/> 
                                 {list.sort(compareValues(this.state.value)).map((key, index) => (
                                     <Card fluid href={key.link}>
                                         <Card.Content>
@@ -142,6 +169,7 @@ class Level3 extends Component{
                                                 <p>{this.name}</p>
                                                 <hr/>
                                                 <p>{key.group}</p>
+                                                <p>การเข้าถึง : {key.rank}</p>
                                             </Card.Description>
                                         </Card.Content>
                                     </Card>

@@ -41,12 +41,14 @@ import Level26 from './pages/level26';
 import Level27 from './pages/level27';
 import Level28 from './pages/level28';
 import Level29 from './pages/level29';
+import ScrollToTop from "./config/Totop";
 const NotFoundPage = () => <h1>Not Found</h1>
 
 function App() {
   return (
     <div className="App">
         <Navbar/>
+      <ScrollToTop/>
       <Switch>
         <Route path="/" component={Search} exact/>
         <Route path="/level1/:text" component={level1} exact/>
@@ -60,21 +62,6 @@ function App() {
         <Route path="/level3/:a0/:a1/:a2/:time" component={level3} exact/>
         <Route path="/level3/:a0/:a1/:a2/:a3" component={level3} exact/>
         <Route path="/level3/:a0/:a1/:a2/:a3/:time" component={level3} exact/>
-        <Route path="/level4/" component={Level4} exact />
-        <Route path="/level5/" component={Level5} exact />
-        <Route path="/level6/" component={Level6} exact />
-        <Route path="/level7/" component={Level7} exact />
-        <Route path="/level8/" component={Level8} exact />
-        <Route path="/level9/" component={Level9} exact />
-        <Route path="/level10/" component={Level10} exact />
-        <Route path="/level11/" component={Level11} exact />
-        <Route path="/level12/" component={Level12} exact />
-        <Route path="/level13/" component={Level13} exact />
-        <Route path="/level14/" component={Level14} exact />
-        <Route path="/level15/" component={Level15} exact />
-        <Route path="/level16/" component={Level16} exact />
-        <Route path="/level17/" component={Level17} exact />
-        <Route path="/level18/" component={Level18} exact />
         <Route path="/level19/" component={Level19} exact />
         <Route path="/level19/:a0" component={Level19} exact />
         <Route path="/level20/" component={Level20} exact />
@@ -83,20 +70,6 @@ function App() {
         <Route path="/level21/:a0/:a1" component={Level21} exact />
         <Route path="/level22/" component={Level22} exact />
         <Route path="/level22/:a0/:a1/:a2" component={Level22} exact />
-        <Route path="/level23/" component={Level23} exact />
-        <Route path="/level23/:a0/:a1/:a2" component={Level23} exact />
-        <Route path="/level24/" component={Level24} exact />
-        <Route path="/level24/:a0/:a1/:a2" component={Level24} exact />
-        <Route path="/level25/" component={Level25} exact />
-        <Route path="/level25/:a0/:a1/:a2" component={Level25} exact />
-        <Route path="/level26/" component={Level26} exact />
-        <Route path="/level26/:a0/:a1/:a2" component={Level26} exact />
-        <Route path="/level27/" component={Level27} exact />
-        <Route path="/level27/:a0/:a1" component={Level27} exact />
-        <Route path="/level28/" component={Level28} exact />
-        <Route path="/level28/:a0/:a1" component={Level28} exact />
-        <Route path="/level29/" component={Level29} exact />
-        <Route path="/level29/:a0/:a1" component={Level29} exact />
         <Route path="/detail/food/" component={Detail_food} exact/>
         <Route path="/detail/drug/" component={Detail_drug} exact/>
         <Route path="/detail/cosmetic/" component={Detail_cosmetic} exact/>

@@ -26,7 +26,6 @@ class Iconmini extends React.Component {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={16} textAlign={"center"}>
-                                <h2>หมวดหมู่</h2>
                                 <h4>เลือกหมวดหมู่ที่ต้องการสืบค้นข้อมูล</h4>
                             </Grid.Column>
                         </Grid.Row>

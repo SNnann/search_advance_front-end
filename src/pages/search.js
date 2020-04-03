@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import {Button, Card, Container, Grid, Image, Input, Segment, GridRow} from "semantic-ui-react";
-import { Accordion, Form, Menu, Radio, Select, Checkbox} from 'semantic-ui-react'
+import {Button, Card, Container, Grid, Image, Input, Segment} from "semantic-ui-react";
+import { Accordion, Form, Menu, Radio, Select, Checkbox} from 'semantic-ui-react';
 import {Link} from "react-router-dom";
-import src1 from '../images/Banner04.png';
+import src1 from '../images/Banner4.png';
 import Navbar from "./navbar";
 import {apiurl} from "../config/api";
 import Iconmain from "./iconmain";
-  
 class Search extends Component {
     state = { activeIndex: '' }
-
     handleClick = (e, titleProps) => {
         const { index } = titleProps
         const { activeIndex } = this.state
@@ -18,6 +16,11 @@ class Search extends Component {
         this.setState({ activeIndex: newIndex })
     }
 
+    _handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            this.props.history.push('/level1/'+this.state.text)
+        }
+    }
     handleChange = e => {
         const name = e.target.name
         const value = e.target.value
@@ -27,7 +30,6 @@ class Search extends Component {
             return newState
         })
     }
-
     onSearchChangea0 = (e, data) => {
         console.log(data.value);
         this.setState({ a0: data.value })
@@ -53,7 +55,6 @@ class Search extends Component {
         this.setState({ time: data.value });
     }
 
-
     constructor() {
         super();
         this.state={
@@ -65,7 +66,6 @@ class Search extends Component {
             time:'0',
         }
     }
-
     render() {
         const select_level0 = [
             { key: 'อาหาร', text: 'อาหาร', value: 'อาหาร' },
@@ -98,9 +98,7 @@ class Search extends Component {
             { key: '1' , text: 'ภายใน 3 เดือน', value: '1'},
             { key: '2' , text: 'ภายใน 6 เดือน', value: '2'},
         ]
-            
 
-        
         const SearchAdvanceForm = (                               
             <Form>
                 <Form.Group grouped>
@@ -157,93 +155,94 @@ class Search extends Component {
                 </Form.Group>
             </Form>
         )
-    
         const { activeIndex } = this.state
         return (
             <>
-                <Container fluid>
-                    <Segment basic textAlign={"center"} style={{
-                        padding:'0',
-                    }}>
-                        <Image fluid src={src1} centered />
-                    </Segment>
-                    <Iconmain/>
-                    <Segment secondary basic padded='very'>
-                        <Grid textAlign={"center"}>
-                            <Grid.Row>
-                                <Grid.Column >
-                                    <h2>
-                                        คลังข้อมูลเตรียมความพร้อมก่อนยื่นคำขอ
-                                    </h2>
-                                </Grid.Column>
-                            </Grid.Row>
-                            <Grid.Row >
-                                <Grid.Column width={10}>
-                                    <Input
-                                        size='big'
-                                        fluid
-                                        icon={{ name: 'search', circular: true}}
-                                        placeholder='พิมพ์คำที่ต้องการค้นหา...'
-                                        name='text'
-                                        id='text'
-                                        onChange={this.handleChange}
-                                    />
-                                </Grid.Column>
-                                <Grid.Column width={3}>
-                                    <Link to={'/level1/'+this.state.text}>
-                                        <Button size='large' fluid positive >ค้นหา</Button>
-                                    </Link>
-                                </Grid.Column>
-                            </Grid.Row>
+                <Segment basic textAlign={"center"} style={{
+                    padding:'0',
+                    margin:'0'
+                }}>
+                    <Image fluid src={src1} centered />
+                </Segment>
+                <Segment secondary basic padded='very' style={{
+                    margin:'0'
+                }}>
+                    <Grid textAlign={"center"}>
+                        <Grid.Row>
+                            <Grid.Column >
+                                <h2>
+                                    คลังข้อมูลเตรียมความพร้อมก่อนยื่นคำขอ
+                                </h2>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row >
+                            <Grid.Column mobile={16} tablet={10} computer={10}>
+                                <Input
+                                    size='big'
+                                    fluid
+                                    icon={{ name: 'search', circular: true}}
+                                    placeholder='พิมพ์คำที่ต้องการค้นหา...'
+                                    name='text'
+                                    id='text'
+                                    onChange={this.handleChange}
+                                    onKeyDown={this._handleKeyDown}
+                                />
+                            </Grid.Column>
+                            <Grid.Column mobile={16} tablet={4} computer={4}>
+                                <Link to={'/level1/'+this.state.text}>
+                                    <Button size='large' fluid positive >สืบค้นข้อมูลก่อนยื่นคำขอ</Button>
+                                </Link>
+                            </Grid.Column>
+                        </Grid.Row>
 
-                            <Grid.Row>
-                                <Grid.Column width={10}>
-                                    <Accordion as={Menu} fluid positive vertical>
-                                        <Menu.Item>
-                                            <Accordion.Title
-                                                size='big'
-                                                active={activeIndex === 0}
-                                                content='การค้นหาแบบละเอียด'
-                                                index={0}
-                                                onClick={this.handleClick}
-                                            />
-                                            <Accordion.Content active={activeIndex === 0} content={SearchAdvanceForm} />
-                                        </Menu.Item>
-                                    </Accordion>
-                                </Grid.Column>
-                            </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column width={10}>
+                                <Accordion as={Menu} fluid positive vertical>
+                                    <Menu.Item>
+                                        <Accordion.Title
+                                            size='big'
+                                            active={activeIndex === 0}
+                                            content='การค้นหาแบบละเอียด'
+                                            index={0}
+                                            onClick={this.handleClick}
+                                        />
+                                        <Accordion.Content active={activeIndex === 0} content={SearchAdvanceForm} />
+                                    </Menu.Item>
+                                </Accordion>
+                            </Grid.Column>
+                        </Grid.Row>
 
-                            <Grid.Row>
-                                <Grid.Column width={3}>
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0+'/'+this.state.time}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.time}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.time}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.time}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.a3}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                    {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.a3+'/'+this.state.time}>
-                                        <Button size='large' fluid positive >ค้นหาละเอียด</Button>
-                                    </Link>}
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>
-                    </Segment>
-                </Container>
+                        <Grid.Row>
+                            <Grid.Column width={3}>
+                                {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0+'/'+this.state.time}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 === "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.time}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 === "" && this.state.a2 === "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.time}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 === "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.time}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time === "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.a3}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                                {this.state.a3 !== "" && this.state.a2 !== "" && this.state.a1 !== "" && this.state.a0 !== "" && this.state.time !== "" &&<Link to ={'/level3/'+this.state.a0 +'/'+this.state.a1+'/'+this.state.a2+'/'+this.state.a3+'/'+this.state.time}>
+                                    <Button size='large' fluid positive >ค้นหาละเอียด</Button>
+                                </Link>}
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                </Segment>
+                <Iconmain/>
             </>);
     }
 }

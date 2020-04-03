@@ -60,7 +60,7 @@ class Search extends Component {
                                     <Card fluid
                                           href={key.link}
                                     >
-                                        <Card.Content   >
+                                        <Card.Content   >
                                             <Card.Header>
                                                 <Highlighter
                                                     highlightClassName="YourHighlightClass"
@@ -79,7 +79,7 @@ class Search extends Component {
                                     <Card fluid
                                           href={key.file}
                                     >
-                                        <Card.Content   >
+                                        <Card.Content   >
                                             <Card.Header>
                                                 <Highlighter
                                                     highlightClassName="YourHighlightClass"
