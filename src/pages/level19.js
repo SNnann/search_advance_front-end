@@ -82,6 +82,7 @@ class Level19 extends Component{
         const data0 = require("../data/data0.json");
         const data1 = require("../data/data1.json");
         const data2 = require("../data/data2.json");
+        const data3 = require("../data/data3.json");
         var list = []
         data0.map((data0, index) => (
             list.push(
@@ -96,7 +97,7 @@ class Level19 extends Component{
         ))
         let filtera1 = data1.filter(
             (data1) => {
-                return data1.ref.indexOf(this.state.a0) !== -1;
+                return (data1.ref.indexOf(this.state.a0) !== -1) && (data1.group.indexOf(this.state.a0) !== -1);
             }
         );
         let filtera2 = data2.filter(
@@ -104,10 +105,11 @@ class Level19 extends Component{
                 return (data2.ref.indexOf(this.state.a1) !== -1) && (data2.group.indexOf(this.state.a0) !== -1);
             }
         );
-
-        const select_level3 = [
-
-        ]
+        let filtera3 = data3.filter(
+            (data3) => {
+                return (data3.ref.indexOf(this.state.a2) !== -1) && (data3.group.indexOf(this.state.a0) !== -1);
+            }
+        )
 
         const select_time = [
             { key: '0' , text: 'แสดงทั้งหมด', value: '0'},
@@ -157,11 +159,13 @@ class Level19 extends Component{
                     <Form.Field
                         control={Select}
                         label=''
-                        options={select_level3}
                         placeholder='เลือกกระบวนการ'
                         name='a3'
                         onChange={this.onSearchChangea3}
                         id='a3'
+                        options={filtera3.map(list3 => (
+                            {key: list3.name, value: list3.name, text: list3.name}
+                        ))}
                     />
 
                     <Form.Field

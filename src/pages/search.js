@@ -67,32 +67,39 @@ class Search extends Component {
         }
     }
     render() {
-        const select_level0 = [
-            { key: 'อาหาร', text: 'อาหาร', value: 'อาหาร' },
-            { key: 'ยา', text: 'ยา', value: 'ยา' },
-        ]
+        const data0 = require("../data/data0.json");
+        const data1 = require("../data/data1.json");
+        const data2 = require("../data/data2.json");
+        const data3 = require("../data/data3.json");
 
-        const select_level1 = [
-            { key: 'สถานที่', text:'สถานที่', value: 'สถานที่' },
-            { key: 'ทะเบียนตำรับยา', text: 'ทะเบียนตำรับยา', value: 'ทะเบียนตำรับยา' },
-            { key: 'ใบอนุญาต', text: 'ใบอนุญาต', value: 'ใบอนุญาต' },
-            { key: 'โฆษณา', text: 'โฆษณา', value: 'โฆษณา' },
-            { key: 'หนังสือรับรองมาตรฐานสถานที่ผลิตยาในต่างประเทศ ฯ', text: 'หนังสือรับรองมาตรฐานสถานที่ผลิตยาในต่างประเทศ ฯ', value: 'หนังสือรับรองมาตรฐานสถานที่ผลิตยาในต่างประเทศ ฯ' },
-            { key: 'อื่นๆ', text: 'อื่นๆ', value: 'อื่นๆ' },
-        ]
+        var list = []
+        data0.map((data0, index) => (
+            list.push(
+                {
+                    id: data0.id,
+                    name: data0.name,
+                    ref: data0.ref,
+                    state: data0.state,
+                    group: data0.group
+                }
+            )
+        ))
+        let filtera1 = data1.filter(
+            (data1) => {
+                return (data1.ref === this.state.a0) && (data1.group === this.state.a0)
+            }
+        );
+        let filtera2 = data2.filter(
+            (data2) => {
+                return (data2.ref === this.state.a1) && (data2.group === this.state.a0)
+            }
+        );
+        let filtera3 = data3.filter(
+            (data3) => {
+                return (data3.ref === this.state.a2) && (data3.group === this.state.a0)
+            }
+        );
         
-        const select_level2 = [
-            { key: 'ขอใบอนุญาตใหม่', text: 'ขอใบอนุญาตใหม่', value: 'ขอใบอนุญาตใหม่' },
-            { key: 'ขอแก้ไขเปลี่ยนแปลงรายการในใบอนุญาต', text: 'ขอแก้ไขเปลี่ยนแปลงรายการในใบอนุญาต', value: 'ขอแก้ไขเปลี่ยนแปลงรายการในใบอนุญาต' },
-            { key: 'ขอต่ออายุใบอนุญาต', text: 'ขอต่ออายุใบอนุญาต', value: 'ขอต่ออายุใบอนุญาต' },
-            { key: '​ขอใบแทนใบอนุญาต', text: '​ขอใบแทนใบอนุญาต', value: '​ขอใบแทนใบอนุญาต' },
-            { key: '​ขอยกเลิกใบอนุญาต', text: '​ขอยกเลิกใบอนุญาต', value: '​ขอยกเลิกใบอนุญาต' },
-        ]
-
-        const select_level3 = [
-
-        ]
-
         const select_time = [
             { key: '0' , text: 'แสดงทั้งหมด', value: '0'},
             { key: '1' , text: 'ภายใน 3 เดือน', value: '1'},
@@ -105,41 +112,49 @@ class Search extends Component {
                     <Form.Field
                         control={Select}
                         label=''
-                        options={select_level0}
                         placeholder='เลือกหมวด'
                         name='a0'
                         onChange={this.onSearchChangea0}
                         id='a0'
+                        options={data0.map(list => (
+                            {key: list.name, value: list.name, text: list.name}
+                        ))}
                     />
         
                     <Form.Field
                         control={Select}
                         label=''
-                        options={select_level1}
                         placeholder='เลือกกลุ่มใบอนุญาต'
                         name='a1'
                         onChange={this.onSearchChangea1}
                         id='a1'
+                        options={filtera1.map(list1 => (
+                            {key: list1.name, value: list1.name, text: list1.name}
+                        ))}
                     />
         
                     <Form.Field
                         control={Select}
                         label=''
-                        options={select_level2}
                         placeholder='เลือกใบอนุญาต'
                         name='a2'
                         onChange={this.onSearchChangea2}
                         id='a2'
+                        options={filtera2.map(list2 => (
+                            {key: list2.name, value: list2.name, text: list2.name}
+                        ))}
                     />
 
                     <Form.Field
                         control={Select}
                         label=''
-                        options={select_level3}
                         placeholder='เลือกกระบวนการ'
                         name='a3'
                         onChange={this.onSearchChangea3}
                         id='a3'
+                        options={filtera3.map(list3 => (
+                            {key: list3.name, value: list3.name, text: list3.name}
+                        ))}
                     />
 
                     <Form.Field

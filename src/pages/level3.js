@@ -68,19 +68,24 @@ class Level3 extends Component{
 
     render(){
         var list = []
-        this.state.data.map((key, index) => (
-            list.push(
-                {
-                    id: key.id,
-                    name: key.name,
-                    state: key.state,
-                    group: key.group,
-                    link: '/level1/' + key.name +'/drill/' +key.id,
-                    date: key.date,
-                    rank: key.rank,
-                }
-            )
-        ))
+        if (this.state.data !== []){
+            this.state.data.map((key, index) => (
+                list.push(
+                    {
+                        id: key.id,
+                        name: key.name,
+                        state: key.state,
+                        group: key.group,
+                        link: '/level1/'+key.name+'/drill/'+key.id,
+                        date: key.date,
+                        rank: key.rank,
+                        isfile:key.isfile,
+                        file:key.file
+                    }
+                )
+            ))
+        }
+        
 
         function compareValues(key, order = 'asc') {
             return function innerSort(a, b) {
