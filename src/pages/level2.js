@@ -86,6 +86,7 @@ class Search extends Component {
                         state:key.state,
                         group:key.group,
                         link:'/level1/'+this.props.match.params.text+'/drill/'+key.id,
+                        link:'/level1/'+key.name+'/drill/'+key.id,
                         isfile:key.isfile,
                         file:key.file
                     }
@@ -217,7 +218,7 @@ class Search extends Component {
                                 }
                                 <br/>
                                 {!this.state.isfile &&
-                                currentCountries.map((key, index) => (
+                                list.map((key, index) => (
                                     <Card fluid
                                           href={key.link}
                                     >
